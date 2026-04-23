@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uniplyt — Виробництво ДВП №1 в Україні</title>
+  <meta name="description" content="Uniplyt — лідер з виробництва ДВП в Україні. Деревообробне виробництво повного циклу: ДВП, ДВПО, фанера, пиломатеріали, двері, паливні брикети.">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =============================================
+       СЕКЦИЯ 1: ХЕДЕР
+       Лого по центру, язык слева, бургер справа.
+       Высота 100px — лого с рамкой должно быть заметным.
+       Фон — тёплая кость #F2EBDC.
+       ============================================= -->
+  <header class="header">
+    <button class="header__lang" aria-label="Змінити мову">UA</button>
+
+    <a href="/" class="header__logo" aria-label="Uniplyt — на головну">
+      <img src="image/svg/uniplyt_logo.svg" alt="Uniplyt">
+    </a>
+
+    <button class="header__burger" aria-label="Відкрити меню">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- =============================================
+       СЕКЦИЯ 2: HERO
+       Полноэкранный блок с фото производства + текст.
+       Структура: label → headline → sub → CTA → peek.
+       Фото: image/kotelnja-na-vidhodah-derevoobrobky.jpg
+       (временное — будет заменено на финальное).
+       ============================================= -->
+  <section class="hero">
+    <div class="hero__content">
+      <h1 class="hero__headline">
+        У світі<br>
+        деревообробки<br>
+        цифри кажуть<br>
+        самі за себе.
+      </h1>
+    </div>
+
+    <!-- Цифры — внутри хероя, прямо на фото с тем же overlay. -->
+    <!-- Не отдельная полоса, а продолжение композиции.         -->
+    <div class="hero__stats">
+      <div class="stats__item">
+        <div class="stats__number"><span data-target="23">0</span></div>
+        <div class="stats__unit">років</div>
+        <div class="stats__label">на ринку</div>
+      </div>
+
+      <div class="stats__item">
+        <div class="stats__number"><span data-target="24">0</span></div>
+        <div class="stats__unit">млн м²</div>
+        <div class="stats__label">на рік</div>
+      </div>
+
+      <div class="stats__item">
+        <div class="stats__number"><span data-target="500">0</span></div>
+        <div class="stats__unit">+</div>
+        <div class="stats__label">партнерів</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       СЕКЦИЯ 4: НАША ПРОДУКЦІЯ — заголовок блока
+       Небольшой титул-якорь на светлом фоне, чтобы
+       из-под хероя красиво попадал в первый кадр.
+       Без padding сверху/снизу — сразу идут карточки.
+       ============================================= -->
+  <section class="products-head">
+    <h2 class="products-head__title">Наша продукція</h2>
+  </section>
+
+  <!-- =============================================
+       5 ТОВАРОВ — простой вертикальный список.
+       Каждый блок: имя → фото. Без карточек,
+       без тёмного фона, без подписей и кнопок.
+       ============================================= -->
+
+  <article class="product">
+    <img class="product__photo" src="pages/product_image/dvp.jpg" alt="">
+    <h3 class="product__name">ДВП</h3>
+    <a href="pages/dvp.html" class="product__btn">Детальніше</a>
+  </article>
+
+  <article class="product">
+    <img class="product__photo" src="pages/product_image/dvpo.jpg" alt="">
+    <h3 class="product__name">ДВПО</h3>
+    <a href="pages/dvpo.html" class="product__btn">Детальніше</a>
+  </article>
+
+  <article class="product">
+    <img class="product__photo" src="pages/product_image/fanera.jpg" alt="">
+    <h3 class="product__name">Фанера</h3>
+    <a href="pages/fanera.html" class="product__btn">Детальніше</a>
+  </article>
+
+  <article class="product">
+    <img class="product__photo" src="pages/product_image/pilomat.jpg" alt="">
+    <h3 class="product__name">Пиломатеріали</h3>
+    <a href="pages/pilomaterialy.html" class="product__btn">Детальніше</a>
+  </article>
+
+  <article class="product">
+    <img class="product__photo" src="pages/product_image/ruf.jpg" alt="">
+    <h3 class="product__name">Паливні брикети</h3>
+    <a href="pages/brykety.html" class="product__btn">Детальніше</a>
+  </article>
+
+  <!-- =============================================
+       СЕКЦИЯ: НАШІ ПРОЕКТИ
+       Тот же визуальный приём что и у товаров:
+       фото 100% × 80vh, имя сверху, кнопка по центру.
+       Разметка использует класс .product намеренно —
+       чтобы не дублировать CSS ради одинакового вида.
+       ============================================= -->
+  <section class="products-head">
+    <h2 class="products-head__title">Наші проекти</h2>
+  </section>
+
+  <article class="product">
+    <img class="product__photo" src="pages/another_products/gorgania/preweiv.webp" alt="">
+    <h3 class="product__name">Gorgania</h3>
+    <a href="pages/gorgania.html" class="product__btn">Детальніше</a>
+  </article>
+
+  <article class="product">
+    <img class="product__photo" src="pages/another_products/unibruk/stare-misto-2.jpg" alt="">
+    <h3 class="product__name">Unibruk</h3>
+    <a href="pages/unibruk.html" class="product__btn">Детальніше</a>
+  </article>
+
+  <article class="product product--logo">
+    <img class="product__photo" src="pages/another_products/vugodskiy_kray/test.jpg" alt="">
+    <h3 class="product__name">Вигодський край</h3>
+    <a href="pages/vygodsky-krai.html" class="product__btn">Детальніше</a>
+  </article>
+
+  <article class="product product--logo product--dark">
+    <img class="product__photo" src="pages/another_products/karpatTram/4.png" alt="">
+    <h3 class="product__name">KarpatTram</h3>
+    <a href="pages/karpattram.html" class="product__btn">Детальніше</a>
+  </article>
+
+
+
+  <!-- =============================================
+       ФУТЕР
+       Тёмно-зелёный блок. Структура простая:
+       — заголовок КОНТАКТИ
+       — 2×2 сетка с 4 контактами
+       — разделитель
+       — юридическая информация и копирайт
+       ============================================= -->
+  <footer class="footer">
+    <div class="footer__inner">
+
+      <h3 class="footer__section-title">Контакти</h3>
+
+      <div class="footer__contacts">
+
+        <div class="footer__contact">
+          <div class="footer__label">Телефон</div>
+          <a href="tel:+380347761101" class="footer__value">+38 (03477) 6-11-01</a>
+        </div>
+
+        <div class="footer__contact">
+          <div class="footer__label">Продажі</div>
+          <a href="mailto:uniplytsales@gmail.com" class="footer__value">uniplytsales@gmail.com</a>
+        </div>
+
+        <div class="footer__contact">
+          <div class="footer__label">Секретаріат</div>
+          <a href="mailto:secretar@uniplyt.com.ua" class="footer__value">secretar@uniplyt.com.ua</a>
+        </div>
+
+        <div class="footer__contact">
+          <div class="footer__label">Адреса</div>
+          <div class="footer__value">м. Вигода,<br>Івано-Франківська обл.</div>
+        </div>
+
+      </div>
+
+      <hr class="footer__divider">
+
+      <div class="footer__legal">
+        <div class="footer__legal-row">ТОВ «Уніплит» · ЄДРПОУ 30905968</div>
+        <div class="footer__legal-row">© 2003–2026 Усі права захищені</div>
+        <a href="#" class="footer__policy">Політика конфіденційності</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,553 @@
+/* ============================================= */
+/* БАЗОВЫЕ ПЕРЕМЕННЫЕ (дизайн-токены)             */
+/* ============================================= */
+/* Вынесено в :root чтобы в одном месте менять     */
+/* цвета и размеры — везде подхватятся автоматом.  */
+:root {
+  /* Фоны */
+  --bg-page:    #FFFFFF;   /* Чистый белый — общий фон страницы */
+  --bg-header:  #FFFFFF;   /* Хедер тоже белый (пробуем вариант без песка) */
+  --bg-dark:    #00513B;   /* Тёмно-зелёный — для stats-ленты и футера */
+
+  /* Текст */
+  --text-main:  #1A2E28;   /* Основной тёмный текст */
+  --text-muted: rgba(0, 0, 0, 0.6);
+
+  /* Акценты (из логотипа) */
+  --green-dark:  #00513B;
+  --green-mid:   #40AB35;
+  --green-light: #95C121;
+
+  /* Размеры */
+  --header-h:   100px;      /* Высота хедера: лого с рамкой требует простора */
+  --tap-size:   44px;       /* Минимум для нажимаемой кнопки (A11y) */
+}
+
+/* ============================================= */
+/* СБРОС СТИЛЕЙ                                   */
+/* ============================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ============================================= */
+/* СЕКЦИЯ 1 — ХЕДЕР (100px)                       */
+/* ============================================= */
+/* Структура: [UA слева] [ЛОГОТИП по центру] [☰ справа] */
+/* Для идеального центрирования логотипа боковые  */
+/* элементы имеют равную ширину (44px каждый).    */
+.header {
+  height: var(--header-h);
+  background: var(--bg-header);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  position: sticky;   /* Прилипает к верху при скролле */
+  top: 0;
+  z-index: 100;
+  /* Лёгкая тень, чтобы хедер отделялся от контента при скролле */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* Переключатель языка — слева */
+.header__lang {
+  width: var(--tap-size);
+  height: var(--tap-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+/* Логотип — центрированный блок */
+.header__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;           /* Занимает всё свободное место между lang и burger */
+  min-width: 0;
+}
+
+/* Сам SVG — 80px, с отступами по 10px сверху/снизу в 100px хедере */
+.header__logo img {
+  height: 80px;
+  width: auto;
+}
+
+/* Бургер-меню — справа */
+.header__burger {
+  width: var(--tap-size);
+  height: var(--tap-size);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Три полоски бургера */
+.header__burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-main);
+  border-radius: 1px;
+}
+
+/* ============================================= */
+/* СЕКЦИЯ 2 — HERO (≈ 85vh с peek)                */
+/* ============================================= */
+/* Полноэкранный блок с фото производства.        */
+/* Поверх — тёмный градиент-оверлей для читаемости */
+/* текста. Высота подобрана так, чтобы на обычной  */
+/* мобилке из-под хероя слегка выглядывал          */
+/* заголовок следующей секции (Apple-peek).        */
+.hero {
+  position: relative;
+  min-height: 73vh;
+  background-image: url('image/kotelnja-na-vidhodah-derevoobrobky.jpg');
+  background-size: cover;
+  background-position: center;
+  /* Три блока по вертикали: заголовок сверху, цифры снизу. */
+  /* justify-content: space-between распределяет их красиво. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 48px 20px 36px;
+  color: #F2EBDC;
+  overflow: hidden;
+}
+
+/* Тёмный оверлей — без него текст сливается с фото */
+/* Сверху чуть темнее (контраст с небом), снизу тоже темнее */
+/* (контраст с пиком "ПРОДУКЦІЯ"). По центру светлее. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 20, 15, 0.60) 0%,
+    rgba(0, 20, 15, 0.40) 45%,
+    rgba(0, 20, 15, 0.70) 100%
+  );
+  z-index: 1;
+}
+
+/* Контейнер всего текстового контента hero */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 560px;
+}
+
+/* Маленький лейбл сверху: "ЛІДЕР ГАЛУЗІ" */
+.hero__label {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 22px;
+  opacity: 0.88;
+}
+
+/* Большой заголовок — 3-5 слов максимум, чтобы глаз цеплялся */
+/* и не требовал чтения. Мозг ловит смысл, рука скроллит дальше. */
+/* Без курсивов и цветных акцентов — чистая типографика.          */
+.hero__headline {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+/* ============================================= */
+/* СТАТИСТИКА внутри хероя (цифры на фото)         */
+/* ============================================= */
+/* Три счётчика идут прямо поверх фотографии,       */
+/* на том же тёмном overlay что и заголовок.        */
+/* Не отдельная полоса — а часть hero-композиции.   */
+.hero__stats {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 4px;
+  /* Лёгкая линия сверху — подсказывает глазу, что     */
+  /* цифры связаны с заголовком выше, но это уже       */
+  /* отдельный блок информации.                         */
+  padding-top: 24px;
+  border-top: 1px solid rgba(242, 235, 220, 0.2);
+}
+
+.stats__item {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+
+/* Само число — крупное, белое, счётчик анимируется */
+/* от 0 до целевого значения (см. script.js).        */
+.stats__number {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Единица измерения (років / млн м² / +) */
+.stats__unit {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 2px;
+  opacity: 0.95;
+}
+
+/* Описание под юнитом (на ринку / на рік / партнерів) */
+.stats__label {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+}
+
+/* ============================================= */
+/* СЕКЦИЯ 4 — ЗАГОЛОВОК "НАША ПРОДУКЦІЯ"           */
+/* ============================================= */
+/* Небольшая шапка-перебивка между хероем и       */
+/* карточками продукции. Фон — тёплая кость,      */
+/* чтобы переход хероя был «прилипшим», без       */
+/* белых промежутков.                              */
+.products-head {
+  background: var(--bg-header);
+  padding: 32px 24px 28px;
+  text-align: center;
+}
+
+.products-head__title {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+/* ============================================= */
+/* КАРТОЧКИ ТОВАРОВ — фото edge-to-edge + оверлей  */
+/* ============================================= */
+/* Структура:                                       */
+/*   - фото на 100% ширины                          */
+/*   - название сверху по центру поверх фото        */
+/*   - кнопка "Детальніше" посередине               */
+/*   - название НЕ кликабельное, кликается кнопка   */
+.product {
+  position: relative;
+  width: 100%;
+  line-height: 0;   /* убираем бейзлайн у <img> */
+  margin-bottom: 10px;   /* промежуток между товарами */
+}
+
+.product:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Фото — на всю ширину, высота 80vh */
+/* object-fit: cover — картинка заполняет блок без искажений, */
+/* обрезаясь по центру если пропорции не совпадают.            */
+.product__photo {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* Название — абсолют, сверху, по центру, поверх фото */
+.product__name {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: #FFFFFF;
+  /* Лёгкая тень — чтобы текст читался на любом цвете фото */
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  /* Нельзя кликнуть по названию — кликается только кнопка */
+  pointer-events: none;
+}
+
+/* Кнопка "Детальніше" — абсолют в центре карточки */
+.product__btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 16px 32px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  line-height: 1;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.product__btn:hover {
+  background: #FFFFFF;
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+/* ============================================= */
+/* ВАРИАНТ КАРТЫ "ЛОГО" — .product--logo           */
+/* ============================================= */
+/* Для проектов, где вместо фото у нас только      */
+/* логотип (Вигодський край, KarpatTram).          */
+/* Приём другой: белый фон, лого по центру         */
+/* целиком (без обрезки), имя сверху dark, кнопка  */
+/* снизу dark-зелёная.                              */
+.product--logo {
+  min-height: 80vh;
+  padding: 40px 24px;
+  /* По умолчанию без фона — сливается с белым body. */
+  /* Для подложки под конкретной карточки используется */
+  /* доп.модификатор .product--grey (серая плита).     */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* center + gap: логотип и кнопка собираются в центре */
+  /* карточки с фиксированным промежутком между собой.  */
+  justify-content: center;
+  gap: 56px;
+}
+
+/* В лого-картках назву не показуємо — вона уже є       */
+/* всередині самого логотипа. Якщо показати повторно —   */
+/* виходить мовний конфлікт (KarpatTram vs КАРПАТСЬКИЙ). */
+.product--logo .product__name {
+  display: none;
+}
+
+/* Чёрная плита — для карточек, где у логотипа свой   */
+/* чёрный фон (KarpatTram). Лого "сливается" с картой, */
+/* смотрится как интегрированный брендовый блок.       */
+.product--dark {
+  background: #0A0A0A;
+}
+
+/* На чёрной карточке зелёная кнопка становится        */
+/* нечитаемой. Делаем кнопку белой с тёмным текстом.   */
+.product--dark .product__btn {
+  background: #FFFFFF;
+  color: #1A1A1A;
+}
+
+.product--dark .product__btn:hover {
+  background: #F2EBDC;
+}
+
+/* ============================================= */
+/* ФУТЕР                                           */
+/* ============================================= */
+/* Тёмно-зелёный блок в конце страницы.            */
+/* Структура:                                      */
+/*  - заголовок КОНТАКТИ по центру                 */
+/*  - 2×2 сетка с 4 контактами                     */
+/*  - тонкая разделительная линия                  */
+/*  - юр.информация и копирайт по центру            */
+.footer {
+  background: var(--green-dark);
+  color: #F2EBDC;
+  padding: 52px 24px 36px;
+}
+
+/* Внутренний контейнер — чтобы на больших экранах  */
+/* контент не расползался на всю ширину.            */
+.footer__inner {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Заголовок секции "КОНТАКТИ" — uppercase с трекингом */
+.footer__section-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0.85;
+  margin-bottom: 36px;
+}
+
+/* Сетка 2×2 для 4 контактов */
+.footer__contacts {
+  display: grid;
+  /* minmax(0, 1fr) — важно, чтобы колонки могли сжиматься */
+  /* ниже content-width, иначе длинные email-ы ломают сетку. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px 20px;
+  margin-bottom: 36px;
+}
+
+.footer__contact {
+  min-width: 0;  /* та же причина — разрешаем сжатие */
+}
+
+/* Подпись над значением (ТЕЛЕФОН / ПРОДАЖІ / ...) */
+.footer__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 8px;
+}
+
+/* Само значение — кремовое, полужирное */
+.footer__value {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #F2EBDC;
+  /* Критично для длинных email-ов: разрешаем перенос  */
+  /* в любом месте, если иначе текст вылезает за блок. */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Ссылки (телефон / email) — с тонкой нижней линией   */
+/* на hover, чтобы видно было что это кликабельно.      */
+a.footer__value {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+a.footer__value:hover {
+  border-bottom-color: rgba(242, 235, 220, 0.4);
+}
+
+/* Тонкая линия-разделитель перед юр.блоком */
+.footer__divider {
+  border: none;
+  height: 1px;
+  background: rgba(242, 235, 220, 0.15);
+  margin: 0 0 24px;
+}
+
+/* Юридический блок — всё по центру, мелким шрифтом */
+.footer__legal {
+  text-align: center;
+}
+
+.footer__legal-row {
+  font-size: 12px;
+  opacity: 0.6;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+/* Ссылка на политику конфиденциальности */
+.footer__policy {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #F2EBDC;
+  opacity: 0.55;
+  border-bottom: 1px solid rgba(242, 235, 220, 0.3);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+
+.footer__policy:hover {
+  opacity: 0.85;
+}
+
+/* Лого — contain, не обрезается, центрируется.        */
+/* Увеличили размер: теперь логотип — главный элемент  */
+/* карточки, а не маленький квадратик на пустом фоне.  */
+.product--logo .product__photo {
+  position: static;
+  order: 2;
+  width: auto;
+  height: auto;
+  max-width: 85%;
+  max-height: 60vh;
+  object-fit: contain;
+}
+
+/* Имя — сверху, в естественном потоке, тёмное     */
+.product--logo .product__name {
+  position: static;
+  order: 1;
+  color: var(--text-main);
+  text-shadow: none;
+  font-size: 36px;
+}
+
+/* Кнопка — внизу, в естественном потоке,           */
+/* тёмно-зелёная с белым текстом для контраста      */
+/* с белым фоном карточки.                          */
+.product--logo .product__btn {
+  position: static;
+  order: 3;
+  transform: none;
+  background: var(--green-dark);
+  color: #FFFFFF;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.product--logo .product__btn:hover {
+  background: var(--green-mid);
+  transform: scale(1.04);
+}
