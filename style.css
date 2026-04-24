@@ -19,8 +19,37 @@
   --green-light: #95C121;
 
   /* Размеры */
-  --header-h:   100px;      /* Высота хедера: лого с рамкой требует простора */
+  /* Хедер: на мобиле 100px (база), растёт до 180px на 4K.    */
+  /* Формула дает мобиле min, на Full HD ~116px, на 4K 180.   */
+  /* Логотип внутри хедера — 80% от его высоты (см. ниже).    */
+  --header-h:   clamp(100px, 30px + 4.5vw, 180px);
   --tap-size:   44px;       /* Минимум для нажимаемой кнопки (A11y) */
+
+  /* ============================================= */
+  /* ШРИФТОВАЯ ШКАЛА — fluid typography             */
+  /* ============================================= */
+  /* Все размеры шрифтов через clamp() — плавное     */
+  /* масштабирование от мобилы до 4K без media       */
+  /* queries. Формула:                                */
+  /*   clamp(МИН, БАЗА_px + КФ*vw, МАКС)              */
+  /* где:                                             */
+  /*   МИН  — размер на самом узком экране (~320px)    */
+  /*   МАКС — потолок на 4K (чтобы не росло до небес) */
+  /*   КФ   — скорость роста по ширине viewport       */
+  /*                                                  */
+  /* Как пользоваться: в любом месте CSS ставь        */
+  /* font-size: var(--fs-xl) — и оно подхватится.     */
+  /* Чтобы глобально сделать все шрифты крупнее —     */
+  /* подними МАКС в соответствующем токене.           */
+  --fs-xs:    clamp(11px, 10px + 0.2vw,  14px);   /* мелкие подписи */
+  --fs-sm:    clamp(13px, 12px + 0.3vw,  17px);   /* метки */
+  --fs-base:  clamp(15px, 14px + 0.3vw,  19px);   /* основной текст */
+  --fs-md:    clamp(16px, 14px + 0.6vw,  24px);   /* акцентный */
+  --fs-lg:    clamp(18px, 15px + 1vw,    32px);   /* пункты меню */
+  --fs-xl:    clamp(26px, 20px + 1.5vw,  48px);   /* подзаголовки секций */
+  --fs-2xl:   clamp(34px, 28px + 1.5vw,  56px);   /* имя товара */
+  --fs-3xl:   clamp(36px, 22px + 2vw,    64px);   /* hero headline */
+  --fs-4xl:   clamp(42px, 28px + 3vw,    80px);   /* stats numbers */
 }
 
 /* ============================================= */
@@ -79,31 +108,187 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
-/* Переключатель языка — слева */
+/* ============================================= */
+/* БОКОВЫЕ ГРУППЫ ХЕДЕРА (left + right)            */
+/* ============================================= */
+/* Чтобы логотип остался ровно по центру хедера,   */
+/* левая и правая группы обёрнуты в flex:1 блоки   */
+/* одинаковой ширины. В левой — UA-кнопка.         */
+/* В правой — nav (от 1200px) и бургер.            */
+.header__side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* ============================================= */
+/* ПЛАШКИ В ЛЕВОЙ ЧАСТИ ХЕДЕРА                    */
+/* ============================================= */
+/* «Слава Україні» — видна на всех размерах.       */
+/* На мобиле — компактная (30px, мелкий шрифт),    */
+/* на планшете/ПК — вровень с UA-кнопкой (44px).    */
+/* Плашка-святочка («Свято») — от 768px.            */
+/* На мобиле она дублируется последним пунктом в    */
+/* бургер-меню (.menu__item--greeting).              */
+.header__plaque {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  border-radius: 2px;
+}
+
+/* Синя плашка з жовтим текстом — кольори прапора */
+.header__plaque--slava {
+  background: #0057B7;
+  color: #FFD700;
+}
+
+/* Свято — плашка-заготовка з пунктирним бордером. */
+/* На мобилі прихована (див. .menu__item--greeting). */
+.header__plaque--holiday {
+  display: none;
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text-main);
+  border: 1px dashed rgba(0, 0, 0, 0.25);
+}
+
+/* Планшет/ПК — плашки стають повнорозмірними (44px),  */
+/* з'являється Свято-плашка, збільшується шрифт.        */
+@media (min-width: 768px) {
+  .header__plaque {
+    height: var(--tap-size);
+    padding: 0 14px;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.3px;
+  }
+
+  .header__plaque--holiday {
+    display: inline-flex;
+  }
+
+  /* Центруємо групу плашок між UA та логотипом. Трюк: auto */
+  /* з обох боків групи — зліва від першої плашки і справа від */
+  /* останньої. Автомаржі рівномірно з'їдають вільне місце,    */
+  /* група опиняється рівно посередині лівої колонки.            */
+  .header__plaque--slava {
+    margin-left: auto;
+  }
+  .header__plaque--holiday {
+    margin-right: auto;
+  }
+
+  /* Збільшуємо gap — щоб плашки не прилипали одна до одної */
+  .header__side {
+    gap: 12px;
+  }
+}
+
+/* Широкий ПК — плашки ще крупніші (чіткіший акцент).  */
+@media (min-width: 1200px) {
+  .header__plaque {
+    height: 48px;
+    padding: 0 18px;
+    font-size: var(--fs-base);
+  }
+}
+
+/* ============================================= */
+/* МОБІЛЬНА РОЗКЛАДКА ХЕДЕРА (до 768px)           */
+/* ============================================= */
+/* Логотип переходить у лівий куток,               */
+/* плашка Слава Україні притискається до бургера.  */
+/*                                                 */
+/* Трюк: display: contents на .header__side        */
+/* "розчиняє" обгортки — їх діти стають прямими    */
+/* flex-дітьми хедера. Далі reorder через order.   */
+/* DOM не торкаємо, логіка тільки в CSS.            */
+@media (max-width: 767px) {
+  .header {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .header__side--left,
+  .header__side--right {
+    display: contents;
+  }
+
+  .header__logo        { order: 1; }
+  .header__langs       { order: 2; }
+  .header__plaque--slava {
+    order: 3;
+    margin-left: auto;   /* виштовхує плашку + бургер до правого краю */
+  }
+  .header__burger      { order: 4; }
+}
+
+.header__side--left {
+  justify-content: flex-start;
+}
+
+.header__side--right {
+  justify-content: flex-end;
+}
+
+/* Перемикач мови — текстовий UA / EN.              */
+/* Обидва видимі одразу, активна мова — жорстка      */
+/* чорна, неактивна — 40% прозорості, клікабельна.   */
+.header__langs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .header__lang {
   width: var(--tap-size);
   height: var(--tap-size);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: var(--fs-md);
   font-weight: 600;
   letter-spacing: 0.5px;
   color: var(--text-main);
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-/* Логотип — центрированный блок */
+.header__lang--active {
+  opacity: 1;
+  cursor: default;
+}
+
+.header__lang:hover:not(.header__lang--active) {
+  opacity: 0.7;
+}
+
+/* Логотип — в центре хедера. flex:none берёт размер по    */
+/* контенту, а боковые группы .header__side (flex:1 каждая) */
+/* выравниваются в одинаковой ширине и выталкивают логотип   */
+/* ровно в центр — независимо от того, сколько элементов     */
+/* справа (бургер один, или nav + бургер).                    */
 .header__logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;           /* Занимает всё свободное место между lang и burger */
+  flex: none;
   min-width: 0;
 }
 
-/* Сам SVG — 80px, с отступами по 10px сверху/снизу в 100px хедере */
+/* Логотип — 80% от высоты хедера. Привязка через calc()    */
+/* означает, что при любом clamp-значении --header-h лого    */
+/* всегда занимает 4/5 доступной высоты, оставляя по 10%     */
+/* воздуха сверху и снизу.                                     */
 .header__logo img {
-  height: 80px;
+  height: calc(var(--header-h) * 0.8);
   width: auto;
 }
 
@@ -179,7 +364,7 @@ img {
 
 /* Маленький лейбл сверху: "ЛІДЕР ГАЛУЗІ" */
 .hero__label {
-  font-size: 12px;
+  font-size: var(--fs-xs);
   letter-spacing: 3px;
   text-transform: uppercase;
   font-weight: 500;
@@ -191,7 +376,7 @@ img {
 /* и не требовал чтения. Мозг ловит смысл, рука скроллит дальше. */
 /* Без курсивов и цветных акцентов — чистая типографика.          */
 .hero__headline {
-  font-size: 36px;
+  font-size: var(--fs-3xl);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.5px;
@@ -228,7 +413,7 @@ img {
 /* Само число — крупное, белое, счётчик анимируется */
 /* от 0 до целевого значения (см. script.js).        */
 .stats__number {
-  font-size: 42px;
+  font-size: var(--fs-4xl);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1px;
@@ -239,7 +424,7 @@ img {
 
 /* Единица измерения (років / млн м² / +) */
 .stats__unit {
-  font-size: 13px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   letter-spacing: 0.3px;
   margin-bottom: 2px;
@@ -248,7 +433,7 @@ img {
 
 /* Описание под юнитом (на ринку / на рік / партнерів) */
 .stats__label {
-  font-size: 11px;
+  font-size: var(--fs-xs);
   letter-spacing: 0.5px;
   opacity: 0.7;
 }
@@ -267,11 +452,26 @@ img {
 }
 
 .products-head__title {
-  font-size: 34px;
+  font-size: var(--fs-xl);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.5px;
   color: var(--text-main);
+}
+
+/* ============================================= */
+/* СТРОКА КАРТОЧЕК — flex-обёртка                  */
+/* ============================================= */
+/* На мобиле: карточки складываются в колонку       */
+/* (flex-basis 100% + wrap = по одной в строку).    */
+/* От 1024px: две карточки в ряд (см. media ниже).  */
+/* Промежуток между карточками — 10px во всех       */
+/* направлениях через gap (и вертикальные, и        */
+/* горизонтальные при wrap).                         */
+.products-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 /* ============================================= */
@@ -284,13 +484,8 @@ img {
 /*   - название НЕ кликабельное, кликается кнопка   */
 .product {
   position: relative;
-  width: 100%;
+  flex: 1 1 100%;   /* мобильное: всю ширину занимает */
   line-height: 0;   /* убираем бейзлайн у <img> */
-  margin-bottom: 10px;   /* промежуток между товарами */
-}
-
-.product:last-of-type {
-  margin-bottom: 0;
 }
 
 /* Фото — на всю ширину, высота 80vh */
@@ -310,7 +505,7 @@ img {
   left: 0;
   right: 0;
   text-align: center;
-  font-size: 42px;
+  font-size: var(--fs-2xl);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.5px;
@@ -455,7 +650,7 @@ img {
 /* Само значение — кремовое, полужирное */
 .footer__value {
   display: block;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   line-height: 1.4;
   color: #F2EBDC;
@@ -490,7 +685,7 @@ a.footer__value:hover {
 }
 
 .footer__legal-row {
-  font-size: 12px;
+  font-size: var(--fs-xs);
   opacity: 0.6;
   line-height: 1.5;
   margin-bottom: 4px;
@@ -500,7 +695,7 @@ a.footer__value:hover {
 .footer__policy {
   display: inline-block;
   margin-top: 10px;
-  font-size: 12px;
+  font-size: var(--fs-xs);
   color: #F2EBDC;
   opacity: 0.55;
   border-bottom: 1px solid rgba(242, 235, 220, 0.3);
@@ -510,6 +705,237 @@ a.footer__value:hover {
 
 .footer__policy:hover {
   opacity: 0.85;
+}
+
+/* ============================================= */
+/* ЗАГОЛОВОК ВНУТРІШНІХ СТОРІНОК                  */
+/* ============================================= */
+/* Простий каркас: h1 по центру, тепла кость фон, */
+/* легкі відступи. Використовується на всіх       */
+/* сторінках що мають чистий порожній старт.       */
+.page-header {
+  padding: 60px 24px 40px;
+  text-align: center;
+  background: var(--bg-header);
+}
+
+.page-header__title {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+/* ============================================= */
+/* МЕНЮ — fullscreen overlay (мобільне)            */
+/* ============================================= */
+/* Занимает весь экран (100vw × 100vh).              */
+/* По умолчанию — за правым краем (translateX 100%). */
+/* При клике на бургер добавляем .menu--open —      */
+/* выезжает справа с плавной анимацией.              */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;          /* выше хедера (z-100), перекрывает всё */
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.menu--open {
+  transform: translateX(0);
+}
+
+/* Внутренний хедер меню: лого слева, UA + X справа */
+.menu__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.menu__logo {
+  display: flex;
+  align-items: center;
+}
+
+.menu__logo img {
+  height: 48px;
+  width: auto;
+}
+
+.menu__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Перемикач мови всередині бургер-меню —            */
+/* той же текстовий UA / EN, узгоджений зі шапкою.    */
+.menu__langs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu__lang {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.menu__lang--active {
+  opacity: 1;
+  cursor: default;
+}
+
+.menu__lang:hover:not(.menu__lang--active) {
+  opacity: 0.7;
+}
+
+/* Кнопка закрытия — крестик */
+.menu__close {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-main);
+}
+
+/* Список пунктов меню */
+.menu__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Каждый пункт с тонкой линией снизу */
+.menu__item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Кнопка акордеона (Продукція/Компанія/Екологія) */
+.menu__toggle {
+  width: 100%;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--text-main);
+  text-align: left;
+  font-family: inherit;
+}
+
+/* Открытый акордеон — активный цвет (зелёный из лого) */
+.menu__toggle[aria-expanded="true"] {
+  color: var(--green-mid);
+}
+
+/* Стрілочка-шеврон справа — намальована двома бордерами. */
+/* Закрито: rotate(-45deg) → виглядає як "›" (вправо).    */
+/* Відкрито: rotate(45deg) → виглядає як "⌄" (вниз).      */
+/* Плавне обертання + зміна кольору через transition.      */
+.menu__sign {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid rgba(0, 0, 0, 0.45);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.45);
+  transform: rotate(-45deg);
+  margin-right: 6px;  /* відсуваємо від правого краю, щоб не різалось */
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.menu__toggle[aria-expanded="true"] .menu__sign {
+  transform: rotate(45deg);
+  border-color: var(--green-mid);
+}
+
+/* Плоские посылки (Сертифікати / Проекти / Закупівлі / Контакти) */
+/* Жирнее чем акордеоны — визуальная иерархия                     */
+.menu__link {
+  display: block;
+  padding: 20px 24px;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Под-список акордеона — закрыт по умолчанию (max-height: 0) */
+/* При раскрытии — max-height становится достаточно большим,   */
+/* transition делает плавное «разворачивание».                  */
+.menu__sub {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.025);
+  transition: max-height 0.3s ease;
+}
+
+.menu__toggle[aria-expanded="true"] + .menu__sub {
+  max-height: 500px;   /* с запасом под все подпункты */
+}
+
+/* Сами подпункты: индент слева, меньший размер, обычный вес */
+.menu__sub a {
+  display: block;
+  padding: 14px 24px 14px 40px;
+  font-size: var(--fs-base);
+  font-weight: 400;
+  color: var(--text-main);
+}
+
+/* Когда меню открыто — блокируем скрол страницы под ним */
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* Свято-плашка всередині бургер-меню (лише на мобілі). */
+/* На 768+ прихована, бо там показується плашка в хедері. */
+.menu__item--greeting {
+  padding: 20px 24px;
+  border-bottom: none;
+}
+
+.menu__greeting {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border: 1px dashed rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  color: var(--text-main);
+}
+
+@media (min-width: 768px) {
+  .menu__item--greeting {
+    display: none;
+  }
 }
 
 /* Лого — contain, не обрезается, центрируется.        */
@@ -531,7 +957,7 @@ a.footer__value:hover {
   order: 1;
   color: var(--text-main);
   text-shadow: none;
-  font-size: 36px;
+  font-size: var(--fs-xl);
 }
 
 /* Кнопка — внизу, в естественном потоке,           */
@@ -550,4 +976,323 @@ a.footer__value:hover {
 .product--logo .product__btn:hover {
   background: var(--green-mid);
   transform: scale(1.04);
+}
+
+/* ============================================= */
+/* ПЛАНШЕТ/ДЕСКТОП — от 768px                      */
+/* ============================================= */
+/* На широких экранах одна колонка с огромными     */
+/* карточками 80vh выглядит неуместно: карточка на  */
+/* десктопе с экраном 1080px высотой = 864px         */
+/* высотой, это абсурд. Переключаемся на 2 колонки  */
+/* и ограничиваем высоту фото разумным пределом.    */
+/* Breakpoint 768px — классика (Bootstrap/Tailwind md): */
+/* iPad mini portrait (768), iPad (810), Android tablets. */
+@media (min-width: 768px) {
+  /* Две карточки в ряд: каждая по ~50% минус       */
+  /* половина gap'а (gap:10px → по 5px с каждой     */
+  /* стороны компенсируем через calc).              */
+  .products-row .product {
+    flex: 1 1 calc(50% - 5px);
+  }
+
+  /* Фото продукта — ограничиваем высоту. min() даёт */
+  /* меньшее из двух: 70% вьюпорта или 520px.        */
+  /* Это держит карточку соразмерной контенту на    */
+  /* любых десктопных разрешениях.                   */
+  .product__photo {
+    height: min(70vh, 520px);
+  }
+
+  /* Для .product--logo (Вигодський край, KarpatTram) */
+  /* тоже ограничиваем высоту всей карточки и лого.   */
+  .product--logo {
+    min-height: min(70vh, 520px);
+  }
+
+  .product--logo .product__photo {
+    max-height: 45vh;
+  }
+
+  /* Герой чуть выше на широком экране — больше воздуха. */
+  /* Размеры шрифтов (заголовок, цифры) растут сами через */
+  /* clamp() в :root, отдельные оверрайды не нужны.        */
+  .hero {
+    min-height: 80vh;
+  }
+
+  /* Контейнер хероя на мобиле имеет max-width 560px —    */
+  /* ок для смартфона, но на Full HD это узкая колонка    */
+  /* посреди экрана, куда крупный заголовок не влазит и    */
+  /* ломается. Расширяем до 1100px, чтобы даже при крупном */
+  /* bold-шрифте «цифри кажуть» точно помещалось в строку. */
+  .hero__content {
+    max-width: 1100px;
+  }
+
+  /* То же самое для stats-ленты: цифры 23/24/500 при       */
+  /* большом шрифте (до 80px) нуждаются в шире контейнере,  */
+  /* иначе слипаются. gap тоже увеличиваем для воздуха.     */
+  .hero__stats {
+    max-width: 720px;
+    gap: 32px;
+  }
+}
+
+/* ============================================= */
+/* НАВИГАЦИЯ В ХЕДЕРЕ — от 1200px                  */
+/* ============================================= */
+/* На десктопе рядом с бургером показываем 3 главных */
+/* пункта: Продукція (dropdown), Наші проекти          */
+/* (dropdown), Сертифікати (простая ссылка).          */
+/* Бургер не прячем — он остаётся как «полное меню»   */
+/* для глубоких страниц (Компанія, Екологія и т.д.).  */
+/*                                                     */
+/* По умолчанию (до 1200px) nav скрыт — только бургер. */
+.header__nav {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Обёртка одного пункта с дропдауном — нужна для          */
+  /* абсолютного позиционирования дропдауна под ним.          */
+  .header__nav-item {
+    position: relative;
+  }
+
+  /* Сам клик-элемент: кнопка (у дропдаунов) или ссылка      */
+  /* (у простых пунктов). Одни и те же стили для обоих.       */
+  .header__nav-btn,
+  .header__nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    font-size: var(--fs-base);
+    font-weight: 500;
+    color: var(--text-main);
+    font-family: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .header__nav-btn:hover,
+  .header__nav-link:hover,
+  .header__nav-item--dropdown:hover .header__nav-btn {
+    color: var(--green-mid);
+  }
+
+  /* Стрелочка после названия дропдауна (тот же CSS-шеврон,   */
+  /* что и в бургер-меню). Крутится при hover через родителя. */
+  .header__nav-btn::after {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.2s;
+  }
+
+  .header__nav-item--dropdown:hover .header__nav-btn::after {
+    transform: rotate(-135deg) translateY(2px);
+  }
+
+  /* Сам дропдаун — белая плашка под пунктом, по умолчанию    */
+  /* невидимый (opacity 0 + visibility hidden).                */
+  /* При :hover на родителя — плавно появляется.               */
+  /* focus-within добавлено для клавиатурной доступности.       */
+  .header__dropdown {
+    position: absolute;
+    top: calc(100% - 4px);
+    left: 0;
+    min-width: 220px;
+    background: #FFFFFF;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    z-index: 150;
+  }
+
+  .header__nav-item--dropdown:hover .header__dropdown,
+  .header__nav-item--dropdown:focus-within .header__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Пункты внутри дропдауна */
+  .header__dropdown a {
+    display: block;
+    padding: 10px 20px;
+    font-size: var(--fs-base);
+    font-weight: 400;
+    color: var(--text-main);
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .header__dropdown a:hover {
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--green-mid);
+  }
+}
+
+/* ============================================= */
+/* 4K+ (от 2400px)                                 */
+/* ============================================= */
+/* На мониторах 2560+ и особенно на 4K (3840px)    */
+/* базовые clamp'ы упираются в свои потолки и текст */
+/* начинает выглядеть «потерянным» на огромном      */
+/* холсте. Переопределяем токены с повышенными      */
+/* стелями — на Full HD это не влияет (media только  */
+/* сверху от 2400), а на 4K шрифты дорастают до      */
+/* 100-120px, как и положено.                         */
+@media (min-width: 2400px) {
+  :root {
+    /* Піднімаємо ШРИФТИ для 2K/4K. Вищі min-значення —   */
+    /* щоб на 2K (2560) було помітно крупніше ніж на ПК.  */
+    --fs-xl:  clamp(56px, 28px + 1.2vw,  76px);
+    --fs-2xl: clamp(66px, 28px + 1.8vw,  96px);
+    --fs-3xl: clamp(80px, 32px + 2vw,   120px);
+    --fs-4xl: clamp(100px, 32px + 2.8vw, 150px);
+
+    /* Хедер і логотип теж рости — на 2K 100px виглядає    */
+    /* як смужка, треба візуально вагоміший.                */
+    --header-h: clamp(140px, 40px + 4vw, 200px);
+  }
+
+  /* Плашки Слава/Свято теж збільшити для балансу з хедером */
+  .header__plaque {
+    height: 64px;
+    padding: 0 24px;
+    font-size: var(--fs-md);
+  }
+
+  /* Навігація — шрифт і padding крупніше */
+  .header__nav-btn,
+  .header__nav-link {
+    font-size: var(--fs-md);
+    padding: 14px 20px;
+  }
+
+  /* Расширяем контейнеры герой-секции ещё сильнее.  */
+  .hero__content {
+    max-width: 1600px;
+  }
+
+  .hero__stats {
+    max-width: 1200px;
+    gap: 56px;
+  }
+
+  /* Карточки продуктов на 4K при 520px высоте смотрятся */
+  /* как марки в альбоме. Поднимаем до 760px.             */
+  .product__photo {
+    height: min(70vh, 760px);
+  }
+
+  .product--logo {
+    min-height: min(70vh, 760px);
+  }
+}
+
+/* ============================================= */
+/* СПРАВЖНІЙ 4K — від 3200px                       */
+/* ============================================= */
+/* 2K (2560) уже виглядає норм у блоці 2400+.       */
+/* А от на 4K (3840×2160) все знову губиться на       */
+/* безмежному полотні. Тут примусово накидаємо         */
+/* фіксовані більші значення без формул — на цьому    */
+/* рівні роздільної здатності немає сенсу в fluid'і,   */
+/* бо користувач і так має 4K монітор, не ресайзить.   */
+@media (min-width: 3200px) {
+  :root {
+    --fs-xl:  96px;    /* підзаголовки секцій */
+    --fs-2xl: 120px;   /* імена продуктів */
+    --fs-3xl: 140px;   /* hero headline */
+    --fs-4xl: 180px;   /* stats numbers */
+
+    --header-h: 240px;
+    --tap-size: 72px;  /* UA-кнопка і бургер — з 44 до 72 */
+  }
+
+  /* UA-кнопка — шрифт теж більший, бо прив'язана до tap-size */
+  .header__lang {
+    font-size: 32px;
+  }
+
+  /* Бургер — полоски товщі і довші для вагомості */
+  .header__burger {
+    gap: 10px;
+  }
+
+  .header__burger span {
+    width: 36px;
+    height: 3px;
+  }
+
+  /* Плашки — крупні, читаються з відстані */
+  .header__plaque {
+    height: 120px;
+    padding: 0 48px;
+    font-size: 32px;
+    border-radius: 3px;
+  }
+
+  /* Nav — повноцінний шрифт, просторий padding */
+  .header__nav-btn,
+  .header__nav-link {
+    font-size: 32px;
+    padding: 24px 36px;
+    gap: 10px;
+  }
+
+  .header__nav-btn::after {
+    width: 11px;
+    height: 11px;
+    border-width: 3px;
+  }
+
+  /* Dropdown пункти теж крупніше */
+  .header__dropdown a {
+    font-size: 28px;
+    padding: 16px 32px;
+  }
+
+  .header__dropdown {
+    min-width: 320px;
+  }
+
+  .hero__content {
+    max-width: 2000px;
+  }
+
+  .hero__stats {
+    max-width: 1500px;
+    gap: 80px;
+  }
+
+  .product__photo {
+    height: min(70vh, 1000px);
+  }
+
+  .product--logo {
+    min-height: min(70vh, 1000px);
+  }
 }

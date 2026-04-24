@@ -60,3 +60,54 @@
   // Подписываем каждый счётчик
   counters.forEach((el) => observer.observe(el));
 })();
+
+
+// =============================================
+// МЕНЮ — открытие/закрытие + акордеоны
+// =============================================
+// Бургер в хедере → открывает fullscreen меню.
+// Крестик внутри меню → закрывает.
+// При открытии — блокируем скрол body.
+// Акордеоны (Продукція/Компанія/Екологія) —
+// независимые, каждый открывается кликом.
+// Esc — закрывает меню.
+
+(function () {
+  const burger = document.querySelector('.header__burger');
+  const menu = document.getElementById('menu');
+  if (!burger || !menu) return;
+
+  const closeBtn = menu.querySelector('.menu__close');
+  const toggles = menu.querySelectorAll('.menu__toggle');
+
+  function openMenu() {
+    menu.classList.add('menu--open');
+    menu.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
+  }
+
+  function closeMenu() {
+    menu.classList.remove('menu--open');
+    menu.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+  }
+
+  burger.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+
+  // Акордеон: клик по заголовку раскрывает/сворачивает подсписок.
+  // Стрелочка-шеврон крутится через CSS (селектор по aria-expanded).
+  toggles.forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+    });
+  });
+
+  // Escape — удобный способ закрыть меню с клавиатуры
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('menu--open')) {
+      closeMenu();
+    }
+  });
+})();

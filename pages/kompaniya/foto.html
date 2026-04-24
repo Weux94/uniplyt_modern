@@ -4,8 +4,154 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Фото виробництва — Uniplyt</title>
+  <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
-  <!-- TODO: контент страницы Фото виробництва -->
+
+  <!-- ХЕДЕР -->
+  <header class="header">
+    <div class="header__side header__side--left">
+      <div class="header__langs">
+        <button class="header__lang header__lang--active" aria-label="Українська">UA</button>
+        <button class="header__lang" aria-label="English">EN</button>
+      </div>
+      <div class="header__plaque header__plaque--slava">Слава Україні!</div>
+      <div class="header__plaque header__plaque--holiday">Свято</div>
+    </div>
+    <a href="../../index.html" class="header__logo" aria-label="Uniplyt — на головну">
+      <img src="../../image/svg/uniplyt_logo.svg" alt="Uniplyt">
+    </a>
+    <div class="header__side header__side--right">
+      <nav class="header__nav" aria-label="Основне меню">
+        <div class="header__nav-item header__nav-item--dropdown">
+          <button class="header__nav-btn" aria-expanded="false">Продукція</button>
+          <div class="header__dropdown">
+            <a href="../dvp.html">ДВП</a>
+            <a href="../dvpo.html">ДВПО</a>
+            <a href="../fanera.html">Фанера</a>
+            <a href="../pilomaterialy.html">Пиломатеріали</a>
+            <a href="../brykety.html">Паливні брикети</a>
+            <a href="../dveri.html">Двері</a>
+          </div>
+        </div>
+        <div class="header__nav-item header__nav-item--dropdown">
+          <button class="header__nav-btn" aria-expanded="false">Наші проекти</button>
+          <div class="header__dropdown">
+            <a href="../projects.html">Всі проекти</a>
+            <a href="../gorgania.html">Gorgania</a>
+            <a href="../unibruk.html">Unibruk</a>
+            <a href="../vygodsky-krai.html">Вигодський край</a>
+            <a href="../karpattram.html">KarpatTram</a>
+          </div>
+        </div>
+        <a class="header__nav-link" href="../sertyfikaty.html">Сертифікати</a>
+      </nav>
+      <button class="header__burger" aria-label="Відкрити меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- МЕНЮ -->
+  <nav class="menu" id="menu" aria-hidden="true">
+    <div class="menu__header">
+      <a href="../../index.html" class="menu__logo" aria-label="Uniplyt — на головну">
+        <img src="../../image/svg/uniplyt_logo.svg" alt="Uniplyt">
+      </a>
+      <div class="menu__actions">
+        <div class="menu__langs">
+          <button class="menu__lang menu__lang--active" aria-label="Українська">UA</button>
+          <button class="menu__lang" aria-label="English">EN</button>
+        </div>
+        <button class="menu__close" aria-label="Закрити меню">&times;</button>
+      </div>
+    </div>
+    <ul class="menu__list">
+      <li class="menu__item menu__item--group">
+        <button class="menu__toggle" aria-expanded="false">
+          <span>Продукція</span>
+          <span class="menu__sign" aria-hidden="true"></span>
+        </button>
+        <ul class="menu__sub">
+          <li><a href="../dvp.html">ДВП</a></li>
+          <li><a href="../dvpo.html">ДВПО</a></li>
+          <li><a href="../fanera.html">Фанера</a></li>
+          <li><a href="../pilomaterialy.html">Пиломатеріали</a></li>
+          <li><a href="../brykety.html">Паливні брикети</a></li>
+          <li><a href="../dveri.html">Двері</a></li>
+        </ul>
+      </li>
+      <li class="menu__item menu__item--group">
+        <button class="menu__toggle" aria-expanded="false">
+          <span>Компанія</span>
+          <span class="menu__sign" aria-hidden="true"></span>
+        </button>
+        <ul class="menu__sub">
+          <li><a href="foto.html">Фото виробництва</a></li>
+          <li><a href="social.html">Соціальні ініціативи</a></li>
+          <li><a href="lisokombinat.html">Вигодський лісокомбінат</a></li>
+          <li><a href="finance.html">Фінансова звітність</a></li>
+          <li><a href="yakist.html">Система якості</a></li>
+        </ul>
+      </li>
+      <li class="menu__item menu__item--group">
+        <button class="menu__toggle" aria-expanded="false">
+          <span>Екологія</span>
+          <span class="menu__sign" aria-hidden="true"></span>
+        </button>
+        <ul class="menu__sub">
+          <li><a href="../syrovyna.html">Сировина</a></li>
+          <li><a href="../bezpeka.html">Безпека матеріалів</a></li>
+        </ul>
+      </li>
+      <li class="menu__item"><a class="menu__link" href="../sertyfikaty.html">Сертифікати</a></li>
+      <li class="menu__item"><a class="menu__link" href="../projects.html">Наші проекти</a></li>
+      <li class="menu__item"><a class="menu__link" href="../zakupivli.html">Закупівлі</a></li>
+      <li class="menu__item"><a class="menu__link" href="../contacts.html">Контакти</a></li>
+      <li class="menu__item menu__item--greeting"><div class="menu__greeting">Свято</div></li>
+    </ul>
+  </nav>
+
+  <!-- КАРКАС -->
+  <main>
+    <section class="page-header">
+      <h1 class="page-header__title">Фото виробництва</h1>
+    </section>
+  </main>
+
+  <!-- ФУТЕР -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <h3 class="footer__section-title">Контакти</h3>
+      <div class="footer__contacts">
+        <div class="footer__contact">
+          <div class="footer__label">Телефон</div>
+          <a href="tel:+380347761101" class="footer__value">+38 (03477) 6-11-01</a>
+        </div>
+        <div class="footer__contact">
+          <div class="footer__label">Продажі</div>
+          <a href="mailto:uniplytsales@gmail.com" class="footer__value">uniplytsales@gmail.com</a>
+        </div>
+        <div class="footer__contact">
+          <div class="footer__label">Секретаріат</div>
+          <a href="mailto:secretar@uniplyt.com.ua" class="footer__value">secretar@uniplyt.com.ua</a>
+        </div>
+        <div class="footer__contact">
+          <div class="footer__label">Адреса</div>
+          <div class="footer__value">м. Вигода,<br>Івано-Франківська обл.</div>
+        </div>
+      </div>
+      <hr class="footer__divider">
+      <div class="footer__legal">
+        <div class="footer__legal-row">ТОВ «Уніплит» · ЄДРПОУ 30905968</div>
+        <div class="footer__legal-row">© 2003–2026 Усі права захищені</div>
+        <a href="#" class="footer__policy">Політика конфіденційності</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
 </body>
 </html>
