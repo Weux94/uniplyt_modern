@@ -612,68 +612,27 @@ img {
   margin: 0 auto;
 }
 
-/* Білий логотип у футері — на мобілі прихований,   */
-/* від 768px стає частиною 2-колонної сітки:         */
-/* лого зліва, блок з КОНТАКТИ + контактами справа.   */
-/* Розмір меншим за хедер-логотип — футер це ж         */
-/* вторинна навігація, не повинен домінувати.          */
-.footer__logo {
-  display: none;
+/* Білий логотип у футері — видалено повністю:         */
+/* вирішили що FSC-картинка в ряду контактів достатній */
+/* бренд-акцент, а зайвий лого тільки дублював хедер.   */
+
+/* FSC — один із 5 flex-елементів у ряду контактів.      */
+/* На мобілі/планшеті: займає власний рядок (flex 100%)   */
+/* і стоїть ПЕРШИМ (order: -1) — над 4-ма контактами 2×2. */
+/* На 1024+ повертається в натуральну позицію (3-й з 5).  */
+.footer__fsc {
+  flex: 1 1 100%;
+  order: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
 }
 
-@media (min-width: 768px) {
-  /* Переробляємо внутрішній контейнер футера на grid: */
-  /* [ лого ] [ КОНТАКТИ         ]                      */
-  /* [ лого ] [ 4 контакти        ]                     */
-  /* [ divider span all           ]                     */
-  /* [ legal span all             ]                     */
-  .footer__inner {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 60px;
-    row-gap: 16px;
-    align-items: center;
-  }
-
-  .footer__logo {
-    display: block;
-    grid-column: 1;
-    grid-row: 1 / span 2;   /* займає дві верхні строки */
-    align-self: center;
-  }
-
-  .footer__logo img {
-    /* Розмір меншим ніж у хедері: на Full HD ~100px, на  */
-    /* планшеті ~80px, на 4K упирається в 180px.           */
-    width: clamp(80px, 4vw + 40px, 180px);
-    height: auto;
-    display: block;
-  }
-
-  /* КОНТАКТИ зсуваємо в праву колонку, вирівнюємо ліворуч */
-  .footer__section-title {
-    grid-column: 2;
-    text-align: left;
-    margin-bottom: 0;   /* gap grid'а замість margin */
-  }
-
-  .footer__contacts {
-    grid-column: 2;
-    margin-bottom: 0;   /* gap grid'а */
-  }
-
-  /* Розділювач і юр-блок тягнемо на всю ширину */
-  .footer__divider {
-    grid-column: 1 / -1;
-    margin-top: 32px;
-  }
-
-  /* Юр-блок базово flex (див. загальне правило),         */
-  /* тут тільки займаємо обидві колонки grid-сітки.         */
-  .footer__legal {
-    grid-column: 1 / -1;
-    gap: 8px 24px;
-  }
+.footer__fsc img {
+  width: clamp(90px, 3vw + 60px, 140px);
+  height: auto;
+  display: block;
 }
 
 /* Заголовок секции "КОНТАКТИ" — uppercase с трекингом */
@@ -687,18 +646,19 @@ img {
   margin-bottom: 36px;
 }
 
-/* Сетка 2×2 для 4 контактов */
+/* Контакти через flex. На мобілі: 2 в ряд (по 50%) з      */
+/* FSC-рядком між ними, природно переноситься через wrap.   */
+/* На 1024+ перевизначаємо — всі 5 в один рядок.             */
 .footer__contacts {
-  display: grid;
-  /* minmax(0, 1fr) — важно, чтобы колонки могли сжиматься */
-  /* ниже content-width, иначе длинные email-ы ломают сетку. */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 28px 20px;
   margin-bottom: 36px;
 }
 
 .footer__contact {
-  min-width: 0;  /* та же причина — разрешаем сжатие */
+  flex: 1 1 calc(50% - 10px);   /* половина мінус пів-gap */
+  min-width: 0;
 }
 
 /* Подпись над значением (ТЕЛЕФОН / ПРОДАЖІ / ...) */
@@ -1000,8 +960,24 @@ body.no-scroll {
     max-width: 1200px;
   }
 
+  /* 5 елементів (2 контакти + FSC + 2 контакти) в один  */
+  /* ряд. flex:1 1 0 — кожен бере рівну частку, незалежно   */
+  /* від контенту. min-width:0 дозволяє довгим email-ам      */
+  /* ужиматись замість ламати ряд. order:0 — скидаємо        */
+  /* мобільний order:-1 щоб FSC повернувся на свою 3-ю       */
+  /* позицію в DOM-порядку.                                    */
+  .footer__contact,
+  .footer__fsc {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .footer__fsc {
+    order: 0;
+    margin-bottom: 0;
+  }
+
   .footer__contacts {
-    grid-template-columns: repeat(4, 1fr);
     gap: 40px;
   }
 }
