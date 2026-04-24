@@ -110,4 +110,15 @@
       closeMenu();
     }
   });
+
+  // Клик вне меню (по затемнённому backdrop на десктопе) — закрывает.
+  // Проверяем: меню открыто, клик НЕ внутри меню и НЕ по бургеру
+  // (иначе бургер откроет и сразу же закроет).
+  document.addEventListener('click', (e) => {
+    if (menu.classList.contains('menu--open')
+        && !menu.contains(e.target)
+        && !burger.contains(e.target)) {
+      closeMenu();
+    }
+  });
 })();

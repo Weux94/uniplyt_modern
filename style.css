@@ -612,6 +612,70 @@ img {
   margin: 0 auto;
 }
 
+/* Білий логотип у футері — на мобілі прихований,   */
+/* від 768px стає частиною 2-колонної сітки:         */
+/* лого зліва, блок з КОНТАКТИ + контактами справа.   */
+/* Розмір меншим за хедер-логотип — футер це ж         */
+/* вторинна навігація, не повинен домінувати.          */
+.footer__logo {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  /* Переробляємо внутрішній контейнер футера на grid: */
+  /* [ лого ] [ КОНТАКТИ         ]                      */
+  /* [ лого ] [ 4 контакти        ]                     */
+  /* [ divider span all           ]                     */
+  /* [ legal span all             ]                     */
+  .footer__inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 60px;
+    row-gap: 16px;
+    align-items: center;
+  }
+
+  .footer__logo {
+    display: block;
+    grid-column: 1;
+    grid-row: 1 / span 2;   /* займає дві верхні строки */
+    align-self: center;
+  }
+
+  .footer__logo img {
+    /* Розмір меншим ніж у хедері: на Full HD ~100px, на  */
+    /* планшеті ~80px, на 4K упирається в 180px.           */
+    width: clamp(80px, 4vw + 40px, 180px);
+    height: auto;
+    display: block;
+  }
+
+  /* КОНТАКТИ зсуваємо в праву колонку, вирівнюємо ліворуч */
+  .footer__section-title {
+    grid-column: 2;
+    text-align: left;
+    margin-bottom: 0;   /* gap grid'а замість margin */
+  }
+
+  .footer__contacts {
+    grid-column: 2;
+    margin-bottom: 0;   /* gap grid'а */
+  }
+
+  /* Розділювач і юр-блок тягнемо на всю ширину */
+  .footer__divider {
+    grid-column: 1 / -1;
+    margin-top: 32px;
+  }
+
+  /* Юр-блок базово flex (див. загальне правило),         */
+  /* тут тільки займаємо обидві колонки grid-сітки.         */
+  .footer__legal {
+    grid-column: 1 / -1;
+    gap: 8px 24px;
+  }
+}
+
 /* Заголовок секции "КОНТАКТИ" — uppercase с трекингом */
 .footer__section-title {
   font-size: 14px;
@@ -679,22 +743,34 @@ a.footer__value:hover {
   margin: 0 0 24px;
 }
 
-/* Юридический блок — всё по центру, мелким шрифтом */
+/* Юр-блок в один flex-рядок. На вузьких екранах       */
+/* через flex-wrap природно переноситься на два:         */
+/*   Row 1: ТОВ «Уніплит»                                 */
+/*   Row 2: © 2003-2026 ────────────── Політика          */
+/* Policy отримує margin-left:auto і притискається        */
+/* до правого краю свого рядка незалежно від ширини.      */
 .footer__legal {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+  text-align: left;
 }
 
 .footer__legal-row {
   font-size: var(--fs-xs);
   opacity: 0.6;
   line-height: 1.5;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
-/* Ссылка на политику конфиденциальности */
+/* Ссылка на политику конфиденциальности.               */
+/* margin-left:auto — відштовхує посилання до правого    */
+/* краю (працює в межах flex-рядка, на мобілі це другий   */
+/* рядок де праворуч від © опиняється Політика).          */
 .footer__policy {
   display: inline-block;
-  margin-top: 10px;
+  margin-left: auto;
   font-size: var(--fs-xs);
   color: #F2EBDC;
   opacity: 0.55;
@@ -911,6 +987,55 @@ a.footer__value:hover {
 /* Когда меню открыто — блокируем скрол страницы под ним */
 body.no-scroll {
   overflow: hidden;
+}
+
+/* ============================================= */
+/* ФУТЕР на 1024+ — контакти в один рядок         */
+/* ============================================= */
+/* На мобілі/планшеті 2×2 сітка залишається.       */
+/* Від 1024px розгортаємо в 4 колонки горизонтально */
+/* — контакти вміщуються в один рядок.               */
+@media (min-width: 1024px) {
+  .footer__inner {
+    max-width: 1200px;
+  }
+
+  .footer__contacts {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+}
+
+/* ============================================= */
+/* БУРГЕР-МЕНЮ на 1024+ — бокова панель справа    */
+/* ============================================= */
+/* На мобілі меню на весь екран (inset: 0).        */
+/* Від 1024px — бокова панель 480px справа з       */
+/* затемненням решти сторінки. Це стандартний      */
+/* десктопний патерн для off-canvas меню.            */
+@media (min-width: 1024px) {
+  .menu {
+    left: auto;      /* скидаємо inset:0 left-складову */
+    width: 480px;
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Backdrop — притемнюємо решту сторінки коли меню  */
+  /* відкрите. Спрацьовує через body.no-scroll який     */
+  /* вже ставиться JS при відкритті меню.                */
+  body.no-scroll::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 199;
+    animation: backdrop-fade 0.3s ease;
+  }
+}
+
+@keyframes backdrop-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Свято-плашка всередині бургер-меню (лише на мобілі). */
@@ -1223,6 +1348,14 @@ body.no-scroll {
 /* бо користувач і так має 4K монітор, не ресайзить.   */
 @media (min-width: 3200px) {
   :root {
+    /* Маленькі токени теж ростуть — інакше футер         */
+    /* (labels, legal, values) виглядає нечитабельно.     */
+    --fs-xs:   22px;   /* labels, legal */
+    --fs-sm:   28px;   /* footer values, stats unit */
+    --fs-base: 32px;   /* menu links, base text */
+    --fs-md:   40px;   /* UA/EN, menu toggles */
+    --fs-lg:   52px;
+
     --fs-xl:  96px;    /* підзаголовки секцій */
     --fs-2xl: 120px;   /* імена продуктів */
     --fs-3xl: 140px;   /* hero headline */
@@ -1294,5 +1427,42 @@ body.no-scroll {
 
   .product--logo {
     min-height: min(70vh, 1000px);
+  }
+
+  /* Футер на 4K — все мусить бути значно більшим.     */
+  /* section-title і label мають фіксовані px значення  */
+  /* (бо це специфічні uppercase метки з letter-spacing) */
+  /* — не через змінні, тому переозначаємо тут.           */
+  .footer {
+    padding: 100px 40px 60px;
+  }
+
+  .footer__inner {
+    max-width: 2800px;
+  }
+
+  .footer__section-title {
+    font-size: 32px;
+    letter-spacing: 8px;
+    margin-bottom: 60px;
+  }
+
+  .footer__label {
+    font-size: 22px;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+
+  .footer__contacts {
+    gap: 80px;
+    margin-bottom: 60px;
+  }
+
+  .footer__divider {
+    margin-bottom: 40px;
+  }
+
+  .footer__policy {
+    margin-top: 24px;
   }
 }
