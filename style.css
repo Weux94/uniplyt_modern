@@ -1170,7 +1170,7 @@ body.no-scroll {
 /* НАВИГАЦИЯ В ХЕДЕРЕ — от 1200px                  */
 /* ============================================= */
 /* На десктопе рядом с бургером показываем 3 главных */
-/* пункта: Продукція (dropdown), Наші проекти          */
+/* пункта: Продукція (dropdown), Інші Напрямки          */
 /* (dropdown), Сертифікати (простая ссылка).          */
 /* Бургер не прячем — он остаётся как «полное меню»   */
 /* для глубоких страниц (Компанія, Екологія и т.д.).  */
@@ -1388,12 +1388,12 @@ body.no-scroll {
     background-image: url('pages/product_image/yavoryna+01.webp');
   }
 
-  /* Картки для дропдауна «Наші проекти» — 4 проекти. */
+  /* Картки для дропдауна «Інші Напрямки» — 4 проекти. */
   /* Фото беремо з папок another_products, де вони       */
   /* вже використовуються на головній сторінці.           */
   .mega-card--gorgania   .mega-card__photo {
     background-color: #4A6B5C;
-    background-image: url('pages/another_products/gorgania/goverla.png');
+    background-image: url('pages/another_products/gorgania/photo_1.jpg');
   }
   .mega-card--unibruk    .mega-card__photo {
     background-color: #8B7355;
@@ -1406,6 +1406,181 @@ body.no-scroll {
   .mega-card--karpattram .mega-card__photo {
     background-color: #1A1A1A;
     background-image: url('pages/another_products/karpatTram/carpathian_tram_logo_vertical_web.svg');
+  }
+}
+
+/* ============================================= */
+/* ІНФО-КАРТКИ на головній                          */
+/* ============================================= */
+/* Маркетингові блоки що заміняють видалені картки  */
+/* продуктів/проектів. Структура:                    */
+/*   pill-tag → заголовок → опис → pill-факти       */
+/*   + круглий бейдж справа.                         */
+/* Мобіл: вертикально, бейдж під текстом.            */
+/* 768+: row, бейдж справа.                           */
+.info-cards {
+  padding: 48px 20px;
+  background: var(--bg-page);
+}
+
+.info-cards__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Сама картка — світло-салатовий блок з акцентною  */
+/* лівою смугою у фірмовому темно-зеленому.          */
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 32px 24px;
+  background: #E8EFE3;
+  border-left: 6px solid var(--green-dark);
+  border-radius: 12px;
+}
+
+.info-card__main {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Pill-мітка зверху — uppercase з трекінгом.        */
+.info-card__tag {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 100px;
+}
+
+/* Заголовок — основний текст звичайним bold,        */
+/* виділені фрагменти (<em>) — курсивом і зеленим.   */
+.info-card__title {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.info-card__title em {
+  font-style: italic;
+  /* колір не міняємо — лишаємо темний як і решта тексту, */
+  /* акцент тільки через нахил                              */
+}
+
+.info-card__text {
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.info-card__text strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+/* Pill-список фактів. Outline-стиль (transparent     */
+/* всередині), темно-зелений бордер. Wrap'ить на     */
+/* кілька рядків якщо не вміщається.                  */
+.info-card__facts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.info-card__facts li {
+  padding: 8px 16px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-main);
+  border: 1px solid var(--green-dark);
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+/* Круглий бейдж: пунктирний бордер + символ +       */
+/* цифра + лейбл. На мобілі трохи менший, на 768+    */
+/* збільшується.                                       */
+.info-card__badge {
+  align-self: center;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px dashed var(--green-mid);
+  border-radius: 50%;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.info-card__badge-icon {
+  font-size: 48px;
+  color: var(--green-dark);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.info-card__badge-number {
+  font-size: clamp(28px, 4vw + 14px, 48px);
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.info-card__badge-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+  .info-cards {
+    padding: 64px 24px 80px;
+  }
+
+  .info-cards__inner {
+    gap: 40px;
+  }
+
+  .info-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+    padding: 48px 56px;
+  }
+
+  .info-card__main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .info-card__badge {
+    width: 220px;
+    height: 220px;
+  }
+
+  .info-card__badge-icon {
+    font-size: 56px;
   }
 }
 

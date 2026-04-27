@@ -66,7 +66,7 @@
           </div>
         </div>
         <div class="header__nav-item header__nav-item--dropdown">
-          <button class="header__nav-btn" aria-expanded="false">Наші проекти</button>
+          <button class="header__nav-btn" aria-expanded="false">Інші Напрямки</button>
           <div class="header__dropdown header__dropdown--mega">
             <a href="https://gorgania.com.ua/" target="_blank" rel="noopener" class="mega-card mega-card--gorgania">
               <span class="mega-card__photo"></span>
@@ -167,7 +167,7 @@
         <a class="menu__link" href="pages/certificates.html">Сертифікати</a>
       </li>
       <li class="menu__item">
-        <a class="menu__link" href="pages/projects.html">Наші проекти</a>
+        <a class="menu__link" href="pages/projects.html">Інші Напрямки</a>
       </li>
       <li class="menu__item">
         <a class="menu__link" href="pages/zakupivli.html">Закупівлі</a>
@@ -215,93 +215,85 @@
   </section>
 
   <!-- =============================================
-       СЕКЦИЯ 4: НАША ПРОДУКЦІЯ — заголовок блока
-       Небольшой титул-якорь на светлом фоне, чтобы
-       из-под хероя красиво попадал в первый кадр.
-       Без padding сверху/снизу — сразу идут карточки.
+       ІНФО-СЕКЦІЯ — наративні картки.
+       Заповнюють простір що звільнився від видалених
+       карток продуктів/проектів. Розповідають про
+       компанію в маркетинговій формі: мітка → заголовок
+       з курсивним акцентом → текст → pill-факти, плюс
+       круглий бейдж із цифрою справа.
+       На мобілі — все в колонку, бейдж знизу.
        ============================================= -->
-  <section class="products-head">
-    <h2 class="products-head__title">Наша продукція</h2>
+  <section class="info-cards">
+    <div class="info-cards__inner">
+
+      <article class="info-card">
+        <div class="info-card__main">
+          <div class="info-card__tag">Спадок виробництва</div>
+          <h2 class="info-card__title">
+            Одна компанія. Багато напрямків. <em>Єдиний стандарт якості.</em>
+          </h2>
+          <p class="info-card__text">
+            Вигодський лісокомбінат на Прикарпатті працює з 1970-х. «Уніплит» продовжує його справу і несе марку якості, що накопичувалась десятиліттями. <strong>50+ років</strong> безперервного виробничого досвіду в одній точці.
+          </p>
+          <ul class="info-card__facts">
+            <li>Власний лісокомбінат</li>
+            <li>Прикарпаття, с. Вигода</li>
+            <li>Повний цикл переробки</li>
+          </ul>
+        </div>
+        <div class="info-card__badge" aria-hidden="true">
+          <div class="info-card__badge-icon">✦</div>
+          <div class="info-card__badge-number">50+</div>
+          <div class="info-card__badge-label">Років виробництва</div>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <div class="info-card__main">
+          <div class="info-card__tag">Мокрий процес</div>
+          <h2 class="info-card__title">
+            ДВП без хімії. <em>Тримає сама природа.</em>
+          </h2>
+          <p class="info-card__text">
+            Більшість виробників склеюють деревні плити формальдегідними смолами. Ми йдемо іншим шляхом — мокрим способом, де плиту тримає <strong>лігнін</strong>: натуральна деревна смола з самого волокна. Та сама речовина, що століттями тримає живе дерево в лісі.
+          </p>
+          <ul class="info-card__facts">
+            <li>Клас емісії E1</li>
+            <li>Без синтетичних смол</li>
+            <li>100% природна основа</li>
+          </ul>
+        </div>
+        <div class="info-card__badge" aria-hidden="true">
+          <div class="info-card__badge-icon">✻</div>
+          <div class="info-card__badge-number">Лігнін</div>
+          <div class="info-card__badge-label">Природна зв'язка</div>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <div class="info-card__main">
+          <div class="info-card__tag">Лабораторний контроль</div>
+          <h2 class="info-card__title">
+            Кожну партію — через лабораторію. <em>Без винятків.</em>
+          </h2>
+          <p class="info-card__text">
+            У нас немає «довірчих відвантажень». Кожна партія ДВП проходить чотири перевірки — щільність, вологість, межа міцності, клас емісії формальдегіду — за <strong>ДСТУ та європейськими нормами</strong>. Якщо плита не дотягує хоч одного показника, вона залишається на складі. Не на дорозі до клієнта.
+          </p>
+          <ul class="info-card__facts">
+            <li>Контроль кожної партії</li>
+            <li>ДСТУ + EN</li>
+            <li>Без винятків</li>
+          </ul>
+        </div>
+        <div class="info-card__badge" aria-hidden="true">
+          <div class="info-card__badge-icon">✓</div>
+          <div class="info-card__badge-number">QC</div>
+          <div class="info-card__badge-label">Кожна партія</div>
+        </div>
+      </article>
+
+    </div>
   </section>
-
-  <!-- =============================================
-       5 ТОВАРОВ — обёрнуты в flex-row.
-       На мобиле: один столбик (карточки по 100%).
-       От 1024px: 2 колонки. Последняя (Паливні брикети)
-       занимает всю ширину — это нормально, дизайн
-       принимает это как "широкий финальный блок".
-       ============================================= -->
-  <div class="products-row">
-    <article class="product">
-      <img class="product__photo" src="pages/product_image/dvp.jpg" alt="">
-      <h3 class="product__name">ДВП</h3>
-      <a href="pages/dvp.html" class="product__btn">Детальніше</a>
-    </article>
-
-    <article class="product">
-      <img class="product__photo" src="pages/product_image/dvpo.jpg" alt="">
-      <h3 class="product__name">ДВПО</h3>
-      <a href="pages/dvpo.html" class="product__btn">Детальніше</a>
-    </article>
-
-    <article class="product">
-      <img class="product__photo" src="pages/product_image/fanera.jpg" alt="">
-      <h3 class="product__name">Фанера</h3>
-      <a href="pages/fanera.html" class="product__btn">Детальніше</a>
-    </article>
-
-    <article class="product">
-      <img class="product__photo" src="pages/product_image/pilomat.jpg" alt="">
-      <h3 class="product__name">Пиломатеріали</h3>
-      <a href="pages/pilomaterialy.html" class="product__btn">Детальніше</a>
-    </article>
-
-    <article class="product">
-      <img class="product__photo" src="pages/product_image/ruf.jpg" alt="">
-      <h3 class="product__name">Паливні брикети</h3>
-      <a href="pages/brykety.html" class="product__btn">Детальніше</a>
-    </article>
-  </div>
-
-  <!-- =============================================
-       СЕКЦИЯ: НАШІ ПРОЕКТИ
-       Тот же визуальный приём что и у товаров:
-       фото 100% × 80vh, имя сверху, кнопка по центру.
-       Разметка использует класс .product намеренно —
-       чтобы не дублировать CSS ради одинакового вида.
-       ============================================= -->
-  <section class="products-head">
-    <h2 class="products-head__title">Наші проекти</h2>
-  </section>
-
-  <!-- 4 ПРОЕКТА — тоже в flex-row, 2×2 от 1024px -->
-  <div class="products-row">
-    <article class="product">
-      <img class="product__photo" src="pages/another_products/gorgania/preweiv.webp" alt="">
-      <h3 class="product__name">Gorgania</h3>
-      <a href="https://gorgania.com.ua/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
-    </article>
-
-    <article class="product">
-      <img class="product__photo" src="pages/another_products/unibruk/stare-misto-2.jpg" alt="">
-      <h3 class="product__name">Unibruk</h3>
-      <a href="https://unibruk.com.ua/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
-    </article>
-
-    <article class="product product--logo">
-      <img class="product__photo" src="pages/another_products/vugodskiy_kray/logo_new_size.svg" alt="">
-      <h3 class="product__name">Вигодський край</h3>
-      <a href="https://vyhodskyikrai.com/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
-    </article>
-
-    <article class="product product--logo product--dark">
-      <img class="product__photo" src="pages/another_products/karpatTram/carpathian_tram_logo_vertical_web.svg" alt="">
-      <h3 class="product__name">Карпатський трамвай</h3>
-      <a href="https://kartram.com.ua/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
-    </article>
-  </div>
-
-
 
   <!-- =============================================
        ФУТЕР
@@ -340,7 +332,7 @@
 
         <div class="footer__contact">
           <div class="footer__label">Адреса</div>
-          <div class="footer__value">м. Вигода,<br>Івано-Франківська обл.</div>
+          <div class="footer__value">с. Вигода,<br>Івано-Франківська обл.</div>
         </div>
 
       </div>
