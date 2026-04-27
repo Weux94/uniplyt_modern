@@ -323,11 +323,9 @@ img {
 .hero {
   position: relative;
   min-height: 73vh;
-  background-image: url('image/kotelnja-na-vidhodah-derevoobrobky.jpg');
-  background-size: cover;
-  background-position: center;
-  /* Три блока по вертикали: заголовок сверху, цифры снизу. */
-  /* justify-content: space-between распределяет их красиво. */
+  /* Простий темно-зелений градієнт замість фотофону.    */
+  /* Білий текст і цифри читаються без додаткового overlay. */
+  background: linear-gradient(180deg, var(--green-dark) 0%, #003F2C 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -335,22 +333,6 @@ img {
   padding: 48px 20px 36px;
   color: #F2EBDC;
   overflow: hidden;
-}
-
-/* Тёмный оверлей — без него текст сливается с фото */
-/* Сверху чуть темнее (контраст с небом), снизу тоже темнее */
-/* (контраст с пиком "ПРОДУКЦІЯ"). По центру светлее. */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 20, 15, 0.60) 0%,
-    rgba(0, 20, 15, 0.40) 45%,
-    rgba(0, 20, 15, 0.70) 100%
-  );
-  z-index: 1;
 }
 
 /* Контейнер всего текстового контента hero */
@@ -1239,6 +1221,10 @@ body.no-scroll {
   /* невидимый (opacity 0 + visibility hidden).                */
   /* При :hover на родителя — плавно появляется.               */
   /* focus-within добавлено для клавиатурной доступности.       */
+  /* Закриття затримане на 1с (transition-delay) — дає юзеру */
+  /* час провести курсор по діагоналі від тригера до картки. */
+  /* Якщо за цю секунду курсор повернувся в зону — :hover    */
+  /* спрацьовує знову і дропдаун лишається.                   */
   .header__dropdown {
     position: absolute;
     top: calc(100% - 4px);
@@ -1250,15 +1236,17 @@ body.no-scroll {
     opacity: 0;
     visibility: hidden;
     transform: translateY(8px);
-    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    transition: opacity 0.2s 1s, transform 0.2s 1s, visibility 0.2s 1s;
     z-index: 150;
   }
 
-  .header__nav-item--dropdown:hover .header__dropdown,
-  .header__nav-item--dropdown:focus-within .header__dropdown {
+  /* На hover-in — той же transition, але без delay (відкриття */
+  /* має бути миттєвим, тільки закриття чекає 1с).              */
+  .header__nav-item--dropdown:hover .header__dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
   }
 
   /* Пункты внутри дропдауна */
@@ -1305,8 +1293,7 @@ body.no-scroll {
     transform: translateY(8px);
   }
 
-  .header__nav-item--dropdown:hover .header__dropdown--mega,
-  .header__nav-item--dropdown:focus-within .header__dropdown--mega {
+  .header__nav-item--dropdown:hover .header__dropdown--mega {
     transform: translateY(0);
   }
 
