@@ -38,23 +38,52 @@
       <nav class="header__nav" aria-label="Основне меню">
         <div class="header__nav-item header__nav-item--dropdown">
           <button class="header__nav-btn" aria-expanded="false">Продукція</button>
-          <div class="header__dropdown">
-            <a href="pages/dvp.html">ДВП</a>
-            <a href="pages/dvpo.html">ДВПО</a>
-            <a href="pages/fanera.html">Фанера</a>
-            <a href="pages/pilomaterialy.html">Пиломатеріали</a>
-            <a href="pages/brykety.html">Паливні брикети</a>
-            <a href="pages/dveri.html">Двері</a>
+          <div class="header__dropdown header__dropdown--mega">
+            <a href="pages/dvp.html" class="mega-card mega-card--dvp">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">ДВП</span>
+            </a>
+            <a href="pages/dvpo.html" class="mega-card mega-card--dvpo">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">ДВПО</span>
+            </a>
+            <a href="pages/fanera.html" class="mega-card mega-card--fanera">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">Фанера</span>
+            </a>
+            <a href="pages/pilomaterialy.html" class="mega-card mega-card--pilomat">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">Пиломатеріали</span>
+            </a>
+            <a href="pages/brykety.html" class="mega-card mega-card--brykety">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">Паливні брикети</span>
+            </a>
+            <a href="pages/dveri.html" class="mega-card mega-card--dveri">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">Двері</span>
+            </a>
           </div>
         </div>
         <div class="header__nav-item header__nav-item--dropdown">
           <button class="header__nav-btn" aria-expanded="false">Наші проекти</button>
-          <div class="header__dropdown">
-            <a href="pages/projects.html">Всі проекти</a>
-            <a href="pages/gorgania.html">Gorgania</a>
-            <a href="pages/unibruk.html">Unibruk</a>
-            <a href="pages/vygodsky-krai.html">Вигодський край</a>
-            <a href="pages/karpattram.html">KarpatTram</a>
+          <div class="header__dropdown header__dropdown--mega">
+            <a href="https://gorgania.com.ua/" target="_blank" rel="noopener" class="mega-card mega-card--gorgania">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">Gorgania</span>
+            </a>
+            <a href="https://unibruk.com.ua/" target="_blank" rel="noopener" class="mega-card mega-card--unibruk">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">Unibruk</span>
+            </a>
+            <a href="https://vyhodskyikrai.com/" target="_blank" rel="noopener" class="mega-card mega-card--vygodsky">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">Вигодський край</span>
+            </a>
+            <a href="https://kartram.com.ua/" target="_blank" rel="noopener" class="mega-card mega-card--karpattram">
+              <span class="mega-card__photo"></span>
+              <span class="mega-card__label">KarpatTram</span>
+            </a>
           </div>
         </div>
       </nav>
@@ -134,6 +163,9 @@
       </li>
 
       <!-- Плоскі посилання -->
+      <li class="menu__item">
+        <a class="menu__link" href="pages/certificates.html">Сертифікати</a>
+      </li>
       <li class="menu__item">
         <a class="menu__link" href="pages/projects.html">Наші проекти</a>
       </li>
@@ -248,25 +280,25 @@
     <article class="product">
       <img class="product__photo" src="pages/another_products/gorgania/preweiv.webp" alt="">
       <h3 class="product__name">Gorgania</h3>
-      <a href="pages/gorgania.html" class="product__btn">Детальніше</a>
+      <a href="https://gorgania.com.ua/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
     </article>
 
     <article class="product">
       <img class="product__photo" src="pages/another_products/unibruk/stare-misto-2.jpg" alt="">
       <h3 class="product__name">Unibruk</h3>
-      <a href="pages/unibruk.html" class="product__btn">Детальніше</a>
+      <a href="https://unibruk.com.ua/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
     </article>
 
     <article class="product product--logo">
       <img class="product__photo" src="pages/another_products/vugodskiy_kray/test.jpg" alt="">
       <h3 class="product__name">Вигодський край</h3>
-      <a href="pages/vygodsky-krai.html" class="product__btn">Детальніше</a>
+      <a href="https://vyhodskyikrai.com/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
     </article>
 
     <article class="product product--logo product--dark">
       <img class="product__photo" src="pages/another_products/karpatTram/4.png" alt="">
       <h3 class="product__name">KarpatTram</h3>
-      <a href="pages/karpattram.html" class="product__btn">Детальніше</a>
+      <a href="https://kartram.com.ua/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
     </article>
   </div>
 
@@ -297,7 +329,9 @@
         </div>
 
         <div class="footer__fsc">
-          <img src="image/fsc.png" alt="FSC certified · FSC-C112264">
+          <a href="pages/certificates.html" aria-label="Сертифікати">
+            <img src="image/fsc.png" alt="FSC certified · FSC-C112264">
+          </a>
         </div>
 
         <div class="footer__contact">

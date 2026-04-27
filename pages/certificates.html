@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Пиломатеріали — Uniplyt</title>
+  <title>Сертифікати — Uniplyt</title>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -105,6 +105,7 @@
           <li><a href="bezpeka.html">Безпека матеріалів</a></li>
         </ul>
       </li>
+      <li class="menu__item"><a class="menu__link" href="certificates.html">Сертифікати</a></li>
       <li class="menu__item"><a class="menu__link" href="projects.html">Наші проекти</a></li>
       <li class="menu__item"><a class="menu__link" href="zakupivli.html">Закупівлі</a></li>
       <li class="menu__item"><a class="menu__link" href="contacts.html">Контакти</a></li>
@@ -115,7 +116,45 @@
   <!-- КАРКАС -->
   <main>
     <section class="page-header">
-      <h1 class="page-header__title">Пиломатеріали</h1>
+      <h1 class="page-header__title">Сертифікати</h1>
+    </section>
+
+    <!-- =============================================
+         СПИСОК СЕРТИФІКАТІВ
+         Кожен сертифікат — вертикальний блок:
+           1. підзаголовок (h2 — назва/код сертифіката)
+           2. текстове посилання на PDF з іконкою
+           3. короткий опис
+
+         PDF не вбудовуємо — клік відкриває файл у новій
+         вкладці, кому треба зберегти — той скачає.
+
+         ЯК ДОДАТИ НОВИЙ СЕРТИФІКАТ:
+         1. Поклади PDF у /patterns/.
+         2. Скопіюй блок <article class="cert">...</article>.
+         3. Зміни <h2>, текст посилання, href і <p>.
+         ============================================= -->
+    <section class="certs">
+      <div class="certs__inner">
+        <ul class="certs__list">
+
+          <li>
+            <article class="cert">
+              <h2 class="cert__title">FSC<sup>®</sup> License Code: FSC-C112264</h2>
+              <a class="cert__link"
+                 href="../patterns/UNIPLYT-LLC-FSC-COC-Certificate-6.9.2022_1662444984.pdf"
+                 target="_blank" rel="noopener">
+                <span class="cert__link-icon" aria-hidden="true">PDF</span>
+                <span>Сертифікат FSC<sup>®</sup></span>
+              </a>
+              <p class="cert__desc">За результатами перевірки, яка відбулася в липні 2012 року, компанія «Уніплит» отримала сертифікат ланцюжка постачання Forest Stewardship Council<sup>®</sup>.</p>
+              <p class="cert__desc">На відповідність стандарту FSC-STD-40-004 V3-1; FSC-STD-50-001 V2-1 EN. Термін дії сертифікату з 02/10/2022 до 01/10/2027.</p>
+              <p class="cert__desc">Сертифікація за стандартами FSC<sup>®</sup> свідчить про те, що продукція ТОВ «Уніплит» виготовлена з деревини, отриманої з легальних джерел відповідальними лісозаготівельниками з дотриманням міжнародних екологічних і соціальних вимог.</p>
+            </article>
+          </li>
+
+        </ul>
+      </div>
     </section>
   </main>
 

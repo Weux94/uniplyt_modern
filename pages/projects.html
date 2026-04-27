@@ -38,10 +38,10 @@
           <button class="header__nav-btn" aria-expanded="false">Наші проекти</button>
           <div class="header__dropdown">
             <a href="projects.html">Всі проекти</a>
-            <a href="gorgania.html">Gorgania</a>
-            <a href="unibruk.html">Unibruk</a>
-            <a href="vygodsky-krai.html">Вигодський край</a>
-            <a href="karpattram.html">KarpatTram</a>
+            <a href="https://gorgania.com.ua/" target="_blank" rel="noopener">Gorgania</a>
+            <a href="https://unibruk.com.ua/" target="_blank" rel="noopener">Unibruk</a>
+            <a href="https://vyhodskyikrai.com/" target="_blank" rel="noopener">Вигодський край</a>
+            <a href="https://kartram.com.ua/" target="_blank" rel="noopener">KarpatTram</a>
           </div>
         </div>
       </nav>
@@ -117,6 +117,93 @@
     <section class="page-header">
       <h1 class="page-header__title">Наші проекти</h1>
     </section>
+
+    <!-- =============================================
+         СПИСОК ПРОЕКТІВ
+         Кожен проект — вертикальний блок:
+           1. клікабельний заголовок (h2 → зовнішній сайт)
+           2. короткий опис
+           3. явне посилання-домен з іконкою стрілки
+
+         Усі лінки відкриваються в новій вкладці
+         (target="_blank" rel="noopener").
+
+         ЯК ДОДАТИ НОВИЙ ПРОЕКТ:
+         Скопіюй блок <article class="project">...</article>,
+         встав свій URL у h2 і в .project__link, поправ текст
+         заголовка, опису й домен.
+         ============================================= -->
+    <section class="projects">
+      <div class="projects__inner">
+        <ul class="projects__list">
+
+          <li>
+            <article class="project">
+              <h2 class="project__title">
+                <a href="https://gorgania.com.ua/" target="_blank" rel="noopener">Gorgania</a>
+              </h2>
+              <div class="project__photo">
+                <img src="another_products/gorgania/goverla.png" alt="Gorgania" loading="lazy">
+              </div>
+              <p class="project__desc">(заповнити опис проекту)</p>
+              <a class="project__link" href="https://gorgania.com.ua/" target="_blank" rel="noopener">
+                <span class="project__link-icon" aria-hidden="true">↗</span>
+                <span>gorgania.com.ua</span>
+              </a>
+            </article>
+          </li>
+
+          <li>
+            <article class="project">
+              <h2 class="project__title">
+                <a href="https://unibruk.com.ua/" target="_blank" rel="noopener">Unibruk</a>
+              </h2>
+              <div class="project__photo">
+                <img src="another_products/unibruk/stare-misto-2.jpg" alt="Unibruk" loading="lazy">
+              </div>
+              <p class="project__desc">(заповнити опис проекту)</p>
+              <a class="project__link" href="https://unibruk.com.ua/" target="_blank" rel="noopener">
+                <span class="project__link-icon" aria-hidden="true">↗</span>
+                <span>unibruk.com.ua</span>
+              </a>
+            </article>
+          </li>
+
+          <li>
+            <article class="project">
+              <h2 class="project__title">
+                <a href="https://vyhodskyikrai.com/" target="_blank" rel="noopener">Вигодський край</a>
+              </h2>
+              <div class="project__photo">
+                <img src="another_products/vugodskiy_kray/test.jpg" alt="Вигодський край" loading="lazy">
+              </div>
+              <p class="project__desc">(заповнити опис проекту)</p>
+              <a class="project__link" href="https://vyhodskyikrai.com/" target="_blank" rel="noopener">
+                <span class="project__link-icon" aria-hidden="true">↗</span>
+                <span>vyhodskyikrai.com</span>
+              </a>
+            </article>
+          </li>
+
+          <li>
+            <article class="project">
+              <h2 class="project__title">
+                <a href="https://kartram.com.ua/" target="_blank" rel="noopener">KarpatTram</a>
+              </h2>
+              <div class="project__photo">
+                <img src="another_products/karpatTram/4.png" alt="KarpatTram" loading="lazy">
+              </div>
+              <p class="project__desc">(заповнити опис проекту)</p>
+              <a class="project__link" href="https://kartram.com.ua/" target="_blank" rel="noopener">
+                <span class="project__link-icon" aria-hidden="true">↗</span>
+                <span>kartram.com.ua</span>
+              </a>
+            </article>
+          </li>
+
+        </ul>
+      </div>
+    </section>
   </main>
 
   <!-- ФУТЕР -->
@@ -132,7 +219,9 @@
           <a href="mailto:uniplytsales@gmail.com" class="footer__value">uniplytsales@gmail.com</a>
         </div>
         <div class="footer__fsc">
-          <img src="../image/fsc.png" alt="FSC certified · FSC-C112264">
+          <a href="certificates.html" aria-label="Сертифікати">
+            <img src="../image/fsc.png" alt="FSC certified · FSC-C112264">
+          </a>
         </div>
         <div class="footer__contact">
           <div class="footer__label">Секретаріат</div>
