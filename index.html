@@ -215,13 +215,87 @@
   </section>
 
   <!-- =============================================
-       ІНФО-СЕКЦІЯ — наративні картки.
-       Заповнюють простір що звільнився від видалених
-       карток продуктів/проектів. Розповідають про
-       компанію в маркетинговій формі: мітка → заголовок
-       з курсивним акцентом → текст → pill-факти, плюс
-       круглий бейдж із цифрою справа.
-       На мобілі — все в колонку, бейдж знизу.
+       МОБІЛ + ПЛАНШЕТ (< 1200px) — картки продуктів і
+       проектів прямо на головній. Замінюють відсутність
+       мега-дропдауна нижче 1200px (там бургер-меню) —
+       щоб юзер не мусив робити 2 кліка щоб знайти ДВП.
+       На десктопі (1200+) ці секції приховуються через
+       CSS і показуються інфо-картки нижче.
+       ============================================= -->
+  <section class="products-head">
+    <h2 class="products-head__title">Наша продукція</h2>
+  </section>
+
+  <div class="products-row">
+    <article class="product">
+      <img class="product__photo" src="pages/product_image/dvp.jpg" alt="">
+      <h3 class="product__name">ДВП</h3>
+      <a href="pages/dvp.html" class="product__btn">Детальніше</a>
+    </article>
+
+    <article class="product">
+      <img class="product__photo" src="pages/product_image/dvpo.jpg" alt="">
+      <h3 class="product__name">ДВПО</h3>
+      <a href="pages/dvpo.html" class="product__btn">Детальніше</a>
+    </article>
+
+    <article class="product">
+      <img class="product__photo" src="pages/product_image/fanera.jpg" alt="">
+      <h3 class="product__name">Фанера</h3>
+      <a href="pages/fanera.html" class="product__btn">Детальніше</a>
+    </article>
+
+    <article class="product">
+      <img class="product__photo" src="pages/product_image/pilomat.jpg" alt="">
+      <h3 class="product__name">Пиломатеріали</h3>
+      <a href="pages/pilomaterialy.html" class="product__btn">Детальніше</a>
+    </article>
+
+    <article class="product">
+      <img class="product__photo" src="pages/product_image/ruf.jpg" alt="">
+      <h3 class="product__name">Паливні брикети</h3>
+      <a href="pages/brykety.html" class="product__btn">Детальніше</a>
+    </article>
+  </div>
+
+  <section class="products-head">
+    <h2 class="products-head__title">Інші Напрямки</h2>
+  </section>
+
+  <div class="products-row">
+    <article class="product">
+      <img class="product__photo" src="pages/another_products/gorgania/photo_1.jpg" alt="">
+      <h3 class="product__name">Gorgania</h3>
+      <a href="https://gorgania.com.ua/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
+    </article>
+
+    <article class="product">
+      <img class="product__photo" src="pages/another_products/unibruk/stare-misto-2.jpg" alt="">
+      <h3 class="product__name">Unibruk</h3>
+      <a href="https://unibruk.com.ua/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
+    </article>
+
+    <article class="product product--logo">
+      <img class="product__photo" src="pages/another_products/vugodskiy_kray/logo_new_size.svg" alt="">
+      <h3 class="product__name">Вигодський край</h3>
+      <a href="https://vyhodskyikrai.com/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
+    </article>
+
+    <article class="product product--logo product--dark">
+      <img class="product__photo" src="pages/another_products/karpatTram/carpathian_tram_logo_vertical_web.svg" alt="">
+      <h3 class="product__name">Карпатський трамвай</h3>
+      <a href="https://kartram.com.ua/" target="_blank" rel="noopener" class="product__btn">Детальніше</a>
+    </article>
+  </div>
+
+  <!-- =============================================
+       ДЕСКТОП (1200+) — наративні інфо-картки замість
+       прямих карток продуктів. На цьому брейкпоінті
+       користувач має мега-дропдаун у хедері для
+       швидкого доступу до товарів, тому головна може
+       працювати як маркетингова сторінка-розповідь.
+       Вище секції (.products-head, .products-row) на
+       1200+ приховуються через CSS.
        ============================================= -->
   <section class="info-cards">
     <div class="info-cards__inner">
