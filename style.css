@@ -422,13 +422,26 @@ img {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* Единица измерения (років / млн м² / +) */
+/* Единица измерения (років / млн м²) */
 .stats__unit {
   font-size: var(--fs-sm);
   font-weight: 600;
   letter-spacing: 0.3px;
   margin-bottom: 2px;
   opacity: 0.95;
+}
+
+/* «+» поряд із числом «500». em-розмір (0.5) робить    */
+/* його ~у пів-розміру цифри — приглушений акцент,      */
+/* а не другий гігант. vertical-align піднімає в надряд. */
+/* Opacity матчить колишню .stats__unit щоб не світив   */
+/* як свіжовипраний папір.                                 */
+.stats__plus {
+  font-size: 0.5em;
+  font-weight: 600;
+  opacity: 0.85;
+  margin-left: 2px;
+  vertical-align: 0.4em;
 }
 
 /* Описание под юнитом (на ринку / на рік / партнерів) */
@@ -1283,7 +1296,7 @@ body.no-scroll {
     left: 0;
     right: 0;
     width: 100%;
-    height: 70vh;
+    height: 60vh;
     min-width: 0;
     padding: 0;
     display: flex;
@@ -1332,6 +1345,7 @@ body.no-scroll {
     background-color: #EEE;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
   }
 
   .header__dropdown--mega .mega-card__label {
@@ -1386,12 +1400,12 @@ body.no-scroll {
     background-image: url('pages/another_products/unibruk/stare-misto-2.jpg');
   }
   .mega-card--vygodsky   .mega-card__photo {
-    background-color: #7E8C6E;
-    background-image: url('pages/another_products/vugodskiy_kray/test.jpg');
+    background-color: #FFFFFF;
+    background-image: url('pages/another_products/vugodskiy_kray/logo_new_size.svg');
   }
   .mega-card--karpattram .mega-card__photo {
     background-color: #1A1A1A;
-    background-image: url('pages/another_products/karpatTram/4.png');
+    background-image: url('pages/another_products/karpatTram/carpathian_tram_logo_vertical_web.svg');
   }
 }
 
